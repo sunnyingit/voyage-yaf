@@ -12,3 +12,5 @@ voyage-yaf
 - 队列组件 Memcache/RedisQ
 - 支持多语言国际化的封装 Po 文件
 - 已集成 FirePHP/XPhrof 进行调试
+
+this is test
