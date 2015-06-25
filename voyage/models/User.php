@@ -23,7 +23,6 @@ class Model_User extends Core_Model_Abstract
         // 更多玩家数据的初始化
         // 某些场合为了节约性能，不需要这些，例如战斗玩家列表
         if ($extendInit) {
-
             // 生命值、行动力、精力等自动恢复
             $this->restore->regular();
 
@@ -424,11 +423,11 @@ class Model_User extends Core_Model_Abstract
         $this->_prop = self::getUser($this->_uid);
 
         // 重新加载玩家扩展信息
-        isset($setArr['sea_area_id']) && $this->set('seaArea',  $this->_loadUserSeaArea());
+        isset($setArr['sea_area_id']) && $this->set('seaArea', $this->_loadUserSeaArea());
         isset($setArr['flagship_id']) && $this->set('flagship', $this->_loadUserFlagship());
-        isset($setArr['level_id'])    && $this->set('level',    $this->_loadUserLevel());
+        isset($setArr['level_id'])    && $this->set('level', $this->_loadUserLevel());
         isset($setArr['position_id']) && $this->set('position', $this->_loadUserPosition());
-        isset($setArr['nation_id'])   && $this->set('nation',   $this->_loadUserNation());
+        isset($setArr['nation_id'])   && $this->set('nation', $this->_loadUserNation());
 
         return true;
     }
@@ -492,7 +491,6 @@ class Model_User extends Core_Model_Abstract
 
         // 生命值是否达到参战要求
         if (isset($setArr['hp'])) {
-
             if (is_array($setArr['hp'])) {
                 $hpAfter = $setArr['hp'][0] == '+' ? ($this->_prop['hp'] + $setArr['hp'][1]) : ($this->_prop['hp'] - $setArr['hp'][1]);
             } else {
@@ -525,8 +523,7 @@ class Model_User extends Core_Model_Abstract
             if (Dao('Share_BattleBlock')->get($this->_uid)) {
                 // 存在则执行更新
                 Dao('Share_BattleBlock')->updateByPk($updateArr, $this->_uid);
-            }
-            // 不存在则插入新记录
+            } // 不存在则插入新记录
             else {
                 $this->initBattleBlock($updateArr);
             }
@@ -868,9 +865,7 @@ class Model_User extends Core_Model_Abstract
         $uids = array_diff($uids, $excludeUids);
 
         foreach ($uids as $uid) {
-
             try {
-
                 // 创建玩家实例
                 $user = new Model_User($uid, false);
 
@@ -1002,8 +997,7 @@ class Model_User extends Core_Model_Abstract
             if ($this->_prop['vip_level'] != $vipLv) {
                 return false;
             }
-        }
-        else {
+        } else {
             if (! $this->_prop['vip_level']) {
                 return false;
             }

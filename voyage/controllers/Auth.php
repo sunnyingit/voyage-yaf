@@ -31,8 +31,7 @@ class Controller_Auth extends Controller_Abstract
         // 默认选中的服务器
         if (isset($serverList[$recentGameServerId])) {
             $defGameServerId = $recentGameServerId;
-        }
-        else {
+        } else {
             $defGameServerId = key($serverList);
         }
         $this->assign('defGameServerId', $defGameServerId);
@@ -75,14 +74,12 @@ class Controller_Auth extends Controller_Abstract
         }
 
         if (! $this->isSubmit()) {
-
             $email = rawurldecode($this->getx('email'));
 
             $this->assign('email', $email);
             $this->assign('bodyClass', 'login_bg');
 
         } else {
-
             $postData = $this->getQueryx();
             $uid = Model_User_Api_Auth::register($postData);
 
@@ -143,7 +140,6 @@ class Controller_Auth extends Controller_Abstract
         }
 
         if (! $this->isSubmit()) {
-
             // 防CSRF凭证
             $quickRegHash = md5(uniqid(mt_rand(1, 10000)));
             F('Session')->set('quick_reg_hash', $quickRegHash);
@@ -152,7 +148,6 @@ class Controller_Auth extends Controller_Abstract
             $this->assign('bodyClass', 'login_bg');
 
         } else {
-
             $email    = $this->getx('email');
             $password = $this->getx('password');
 
@@ -205,11 +200,9 @@ class Controller_Auth extends Controller_Abstract
     public function findPasswordAction()
     {
         if (! $this->isSubmit()) {
-
             // 直接渲染模板
 
         } else {
-
             $email     = $this->getx('email');
             $checkCode = $this->getx('check_code');
 
@@ -232,12 +225,10 @@ class Controller_Auth extends Controller_Abstract
         Model_User_Api_Auth::verifyCheckCode($email, $checkCode);
 
         if (! $this->isSubmit()) {
-
             $this->assign('email', $email);
             $this->assign('checkCode', $checkCode);
 
         } else {
-
             // 新的密码
             $password = $this->getx('password');
             $repasswd = $this->getx('repasswd');
@@ -282,8 +273,7 @@ class Controller_Auth extends Controller_Abstract
         // 无痕登陆标记
         if ($loginType == 1) {
             F('Cookie')->set('isQaLogin', true);
-        }
-        else {
+        } else {
             F('Cookie')->set('isQaLogin', null);
         }
 

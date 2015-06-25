@@ -41,7 +41,7 @@ class Model_User_Api_Auth extends Core_Model_Abstract
         // 查看用户信息
         $userIndex = Dao('Ucenter_UserIndex')->getUserByEmail($email);
 
-        if (! $userIndex)  {
+        if (! $userIndex) {
             return array('email' => _('该邮箱未注册'));
         }
 
@@ -79,7 +79,7 @@ class Model_User_Api_Auth extends Core_Model_Abstract
         // 查看用户信息
         $userIndex = Dao('Ucenter_UserIndex')->getUserByEmail($email);
 
-        if (! $userIndex)  {
+        if (! $userIndex) {
             throws(_('该邮箱未注册'));
         }
 
@@ -121,8 +121,7 @@ class Model_User_Api_Auth extends Core_Model_Abstract
             $inviteCodeInfo = Dao('Ucenter_InviteCode')->get($inviteCode);
             if (! $inviteCodeInfo) {
                 return array('invite_code' => _('邀请码输入不正确'));
-            }
-            elseif ($inviteCodeInfo['uid']) {
+            } elseif ($inviteCodeInfo['uid']) {
                 return array('invite_code' => _('邀请码已被使用'));
             }
         }
@@ -372,7 +371,6 @@ class Model_User_Api_Auth extends Core_Model_Abstract
 
         // 新用户送船
         if ($giftShip) {
-
             // 赠送新用户一艘“轻木帆船”
             $user = new Model_User($uid, false);
             $ship = new Model_Ship(201001);
@@ -497,8 +495,7 @@ class Model_User_Api_Auth extends Core_Model_Abstract
             if (! $userTokens = self::getUserCookie()) {
                 return false;
             }
-        }
-        else {
+        } else {
             $userTokens = $userTokensFromUrl;
         }
 
@@ -538,8 +535,7 @@ class Model_User_Api_Auth extends Core_Model_Abstract
             F('Cookie')->set('__rgsid', $__rgsId, $GLOBALS['_TIME'] + self::$cookieTtl);
             // 标记为本次已选过分区
             F('Cookie')->set('__selsv', $GLOBALS['_TIME'], 0);  // 有效期同SESSION
-        }
-        else {
+        } else {
             $__rgsId = F('Cookie')->get('__rgsid');
             if (null === $__rgsId) {
                 return false;
@@ -632,7 +628,7 @@ class Model_User_Api_Auth extends Core_Model_Abstract
         }
 
         // 检测验证码是否过期
-        if (strtotime($userIndex['last_find_password_time']) + 1800 < $GLOBALS['_TIME'] ) {
+        if (strtotime($userIndex['last_find_password_time']) + 1800 < $GLOBALS['_TIME']) {
             throws(_('验证码已过期'));
         }
 

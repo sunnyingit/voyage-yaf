@@ -18,17 +18,13 @@ class Controller_Error extends Core_Controller_Web
         }
 
         try {
-
             throw $e;
 
         } catch (Core_Exception_403 $e) {
-
             if ($this->isAjax()) {
-
                 $this->jsonx($e->getMessage(), '403', array('isDebug' => isDebug()));
 
             } else {
-
                 if (! isDebug()) {
                     header403();
                 }
@@ -37,7 +33,6 @@ class Controller_Error extends Core_Controller_Web
             }
 
         } catch (Core_Exception_404 $e) {
-
             if (! isDebug()) {
                 header404();
             }
@@ -45,22 +40,17 @@ class Controller_Error extends Core_Controller_Web
             _exit($e->getMessage());
 
         } catch (Core_Exception_Logic $e) {
-
             if ($this->isAjax()) {
-
                 $this->jsonx($e->getMessage(), $e->getErrType());
 
             } else {
-
                 _exit($e->getMessage());
             }
 
         } catch (Yaf_Exception_LoadFailed_View $e) {
-
             _exit($e->getMessage());
 
         } catch (Exception $e) {
-
             switch ($e->getCode()) {
                 case YAF_ERR_NOTFOUND_MODULE:
                 case YAF_ERR_NOTFOUND_CONTROLLER:

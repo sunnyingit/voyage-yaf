@@ -31,6 +31,7 @@ class Core_Bootstrap
         define('WEB_PATH',      APP_PATH  . 'web'      . DS);
         define('TPL_PATH',      APP_PATH  . 'views'    . DS);
         define('DATA_PATH',     APP_PATH  . 'data'     . DS);
+        define('CONF_PATH',     APP_PATH  . 'conf'     . DS);
         define('CACHE_PATH',    DATA_PATH . 'cache'    . DS);
         define('LOCALE_PATH',   DATA_PATH . 'locale'   . DS);
         define('RESOURCE_PATH', DATA_PATH . 'resource' . DS);
