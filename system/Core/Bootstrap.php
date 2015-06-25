@@ -76,11 +76,15 @@ class Core_Bootstrap
             $_REQUEST && $_REQUEST = saddslashes($_REQUEST);
         }
 
-        print_r(Yaf_Dispatcher::getInstance()->getRouter());
+        Core_Router::group(array('prefix' => 'v1'), function() {
+            Core_Router::group(array('prefix' => 'v2'), function() {
 
-        $router = new Core_Router();
-
-        $router->get('product/:ident', array('controller' => 'main','action' => 'echo'));
+                Core_Router::get(':id', 'Main@echo');
+                Core_Router::group(array('prefix' => 'v3'), function()  {
+                    Core_Router::get(':id', 'Main@echo');
+                });
+            });
+        });
 
         // 开启输出缓冲
         ob_start();

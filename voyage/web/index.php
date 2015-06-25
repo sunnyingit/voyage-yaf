@@ -15,4 +15,5 @@ define('SYS_PATH', dirname(APP_PATH) . '/system/');
 define('DEBUG_XKEY', 'voyage@dianshitech');
 
 $app = new Yaf_Application(APP_PATH . 'conf/app.ini');
+
 $app->bootstrap()->run();

@@ -19,6 +19,7 @@ class Controller_Main extends Controller_Abstract
 
     public function echoAction()
     {
+        print_r(Yaf_Dispatcher::getInstance()->getRouter()->getRoutes());
         echo 'Hello Voyage-YAF!';
         exit;
     }
