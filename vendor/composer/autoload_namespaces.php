@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Raven_' => array($vendorDir . '/raven/raven/lib'),
+    'Illuminate\\Support' => array($vendorDir . '/illuminate/support'),
 );
