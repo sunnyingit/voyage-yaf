@@ -76,15 +76,8 @@ class Core_Bootstrap
             $_REQUEST && $_REQUEST = saddslashes($_REQUEST);
         }
 
-        Core_Router::group(array('prefix' => 'v1'), function() {
-            Core_Router::group(array('prefix' => 'v2'), function() {
-
-                Core_Router::get(':id', 'Main@echo');
-                Core_Router::group(array('prefix' => 'v3'), function()  {
-                    Core_Router::get(':id', 'Main@echo');
-                });
-            });
-        });
+        // 加载路由
+        Yaf_Loader::import(APP_PATH . 'routes.php');
 
         // 开启输出缓冲
         ob_start();

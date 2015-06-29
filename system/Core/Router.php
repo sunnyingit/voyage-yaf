@@ -19,8 +19,7 @@ class Core_Router {
 
     protected static function updateGroupStack(array $attributes)
     {
-        if ( ! empty(self::$groupStack))
-        {
+        if ( ! empty(self::$groupStack)) {
             $attributes = self::mergeGroup($attributes, end(self::$groupStack));
         }
 
@@ -31,17 +30,7 @@ class Core_Router {
     {
         $new['prefix'] = static::formatGroupPrefix($new, $old);
 
-        $older = array();
-
-        foreach ($old as $k => $v) {
-            if ($k == 'prefix') {
-                continue;
-            }
-
-            $older[$k] = $v;
-        }
-
-        return array_merge_recursive($older, $new);
+        return array_merge_recursive(array_except($old, array('prefix')), $new);
     }
 
     protected static function formatGroupPrefix($new, $old)
@@ -95,12 +84,21 @@ class Core_Router {
         return $route->getRoute();
     }
 
-    public function resource($name, $controller, array $options = array())
+    public static function resource($name, $controller, array $options = array())
     {
         foreach ($this->getResourceMethods($defaults, $options) as $m)
         {
             $this->{'addResource'.ucfirst($m)}($name, $base, $controller, $options);
         }
+    }
+
+    protected function addResourceIndex($name, $base, $controller, $options)
+    {
+        $uri = $this->getResourceUri($name);
+
+        $action = $this->getResourceAction($name, $controller, 'index', $options);
+
+        return $this->get($uri, $action);
     }
 
     protected static function getResourceMethods($defaults, $options)

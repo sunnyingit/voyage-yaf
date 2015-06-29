@@ -1,19 +1,12 @@
 <?php
 
-/**
- * Web 访问入口
- *
- * @author JiangJian <silverd@sohu.com>
- * $Id: index.php 10615 2014-04-21 12:09:13Z zhengjiang $
- */
-
-// 定义路径常量
 define('APP_PATH', dirname(__DIR__) . '/');
 define('SYS_PATH', dirname(APP_PATH) . '/system/');
+define('VENDOR_PATH', dirname(APP_PATH) . '/vendor/');
 
-// 调试模式密钥
-define('DEBUG_XKEY', 'voyage@dianshitech');
+require_once  VENDOR_PATH .'/autoload.php';
+require_once SYS_PATH .'/Core/App.php';
 
-$app = new Yaf_Application(APP_PATH . 'conf/app.ini');
+$app = App::getInstance(new Yaf_Application(APP_PATH . 'conf/app.ini'));
 
 $app->bootstrap()->run();
